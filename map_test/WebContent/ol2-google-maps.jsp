@@ -7,8 +7,8 @@
 <title>OpenLayers 2 OpenStreetMap and Google Maps</title>
 
 <script src="https://www.openlayers.org/api/2.13/OpenLayers.js" type="text/javascript"></script>
-<script src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyCW-rn3iLcHQkN1AKG8hnDUyg8xCJatCdg"></script>
 <script type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=980584DE-E32E-316C-A0F0-271B354FC1AE"></script>
+<script src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyCW-rn3iLcHQkN1AKG8hnDUyg8xCJatCdg"></script>
 
 <!-- Setting the #map style to height: 100% along with the html and body creates a fullscreen map -->  
 
@@ -114,10 +114,9 @@ function init() {
                     numZoomLevels: resolutions.length
                 }
             ),
-            new vworld.Layers.Base('VBASE')
+            //new vworld.Layers.Base('VBASE')
         ]
     });
-    map.setBaseLayer(map.layers[1]); // map doesn't open correctly unless opened with SATELLITE
 
 // Disable any zoom out requests which reset the map centre
 

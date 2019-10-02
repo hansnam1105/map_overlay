@@ -1,11 +1,10 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
   <head>
     <title>2DMap</title>
     <script src="https://www.openlayers.org/api/2.13/OpenLayers.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    
-    <script type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=980584DE-E32E-316C-A0F0-271B354FC1AE"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCW-rn3iLcHQkN1AKG8hnDUyg8xCJatCdg" ></script>
+   <script type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=980584DE-E32E-316C-A0F0-271B354FC1AE"></script>
+   <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCW-rn3iLcHQkN1AKG8hnDUyg8xCJatCdg" ></script>
     
     <script type="text/javascript">
      	var map;
@@ -31,7 +30,11 @@
             };
         map = new OpenLayers.Map('map', options);
          
-        //var gmap = new OpenLayers.Layer.Google("Google Streets"); 
+        var gmap = new OpenLayers.Layer.Google(
+                "Google Roadmap", {
+                    type: google.maps.MapTypeId.ROADMAP,
+                    numZoomLevels: maxResolution
+                });
     	
         var osm = new OpenLayers.Layer.OSM("OSM");
         var options = {serviceVersion : "",
@@ -47,10 +50,10 @@
             buffer:0};
         //======================================
         //1. 배경지도 추가하기
-        vBase = new vworld.Layers.Base('VBASE', {});
+        vBase = new vworld.Layers.Base('VBASE');
         //if (vBase != null){map.addLayer(vBase);}
                
-        map.addLayers([vBase, osm]);
+        map.addLayers([vBase, gmap]);
  
         var switcherControl = new OpenLayers.Control.LayerSwitcher();
         map.addControl(switcherControl);
