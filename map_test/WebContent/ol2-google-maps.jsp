@@ -96,7 +96,7 @@ function init() {
         units: "m",
         projection: "EPSG:900913",
         layers: [ 
-            new OpenLayers.Layer.XYZ(
+         /*    new OpenLayers.Layer.XYZ(
                 "OpenStreetMap", [
                     "http://a.tile.openstreetmap.org/${z}/${x}/${y}.png",
                     "http://b.tile.openstreetmap.org/${z}/${x}/${y}.png",
@@ -107,7 +107,7 @@ function init() {
                     wrapDateLine: true,
                     numZoomLevels: resolutions.length
                 }
-            ),
+            ), */
             new OpenLayers.Layer.Google(
                 "Google Roadmap", {
                     type: google.maps.MapTypeId.ROADMAP,
