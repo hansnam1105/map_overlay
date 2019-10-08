@@ -45,12 +45,18 @@
 		var map = L.map('map').setView([37.5,127], 6);
 
 		var roadMutant = L.gridLayer.googleMutant({
-			maxZoom: 24,
+			maxZoom: 19,
 			type:'roadmap'
 		}).addTo(map);
-		
+		var corner1 = L.latLng(32, 123);
+		var corner2 = L.latLng(41, 135);
+		var bounds = L.latLngBounds(corner1, corner2);
 		//var vmap = L.tileLayer('http://xdworld.vworld.kr:8080/2d/Base/201802/{z}/{x}/{y}.png').addTo(map);
-		var vmap = L.tileLayer('http://api.vworld.kr/req/wmts/1.0.0/980584DE-E32E-316C-A0F0-271B354FC1AE/Base/{z}/{y}/{x}.png').addTo(map);
+		var vmap = L.tileLayer('http://api.vworld.kr/req/wmts/1.0.0/980584DE-E32E-316C-A0F0-271B354FC1AE/Base/{z}/{y}/{x}.png', {
+			attribution: '@<a href="http://www.vworld.kr/dev/v4dv_apicla_a001.do">Vworld</a> contributors',
+			maxZoom: 19,
+			bounds : bounds,
+		}).addTo(map);
 
 		var styleMutant = L.gridLayer.googleMutant({
 			styles: [
@@ -63,7 +69,7 @@
 				{featureType: 'administrative', stylers: [{visibility: 'off'}]},
 				{featureType: 'administrative.locality', stylers: [{visibility: 'off'}]}
 			],
-			maxZoom: 24,
+			maxZoom: 19,
 			type:'roadmap'
 		});
 
