@@ -25,36 +25,16 @@
 
 <script>
     var map = L.map('map');
-    var baseLayers = {
-        "高德地图": L.tileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
-            subdomains: "1234"
-        }),
-        '高德影像': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
-            subdomains: "1234"
-        }), L.tileLayer('http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}', {
-            subdomains: "1234"
-        })]),
-        "立体地图": L.tileLayer('https://a.tiles.mapbox.com/v3/examples.c7d2024a/{z}/{x}/{y}.png', {
-            attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-            key: 'BC9A493B41014CAABB98F0471D759707',
-            styleId: 22677
-        }),
-        "Foursquare": L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
-            attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-            key: 'BC9A493B41014CAABB98F0471D759707',
-            styleId: 22677
-        }),
-        'GeoQ灰色底图': L.tileLayer('http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}').addTo(map)
-    };
-    L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
-        attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        key: 'BC9A493B41014CAABB98F0471D759707',
-        styleId: 22677
-    });
-    var layerControl = L.control.layers(baseLayers, {
+//     var baseLayers = {
+//         'GeoQ灰色底图': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
+//     };
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+//     var layerControl = L.control.layers(baseLayers, {
     	
-    });
-    layerControl.addTo(map);
+//     });
+//     layerControl.addTo(map);
     map.setView(L.latLng(37.550339, 104.114129), 4);
 
     var overlay = new L.echartsLayer(map, echarts);
@@ -77,7 +57,7 @@
     },
     legend: {
         orient: 'vertical',
-        x:'left',
+        x:'right',
         data:['korea Top10', 'china Top10', 'us Top10'],
         selectedMode: 'single',
         selected:{
@@ -86,18 +66,6 @@
         },
         textStyle : {
             color: '#fff'
-        }
-    },
-    toolbox: {
-        show : true,
-        orient : 'vertical',
-        x: 'right',
-        y: 'center',
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            restore : {show: true},
-            saveAsImage : {show: true}
         }
     },
     dataRange: {
@@ -111,7 +79,7 @@
     },
     series : [
         {
-            name: '全国',
+            name: 'Nation',
             type: 'map',
             roam: true,
             hoverable: false,
