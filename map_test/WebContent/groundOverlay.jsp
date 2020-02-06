@@ -29,14 +29,14 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 6,
-          center: {lat: 37.5, lng: 127}
+          center: {lat: 37.579, lng: 126.990}
         });
 
         var imageBounds = {
-          north: 43.0039,
-          south: 33.0640,
-          east: 131.5242,
-          west: 124.1100
+          north: 41,
+          south: 32,
+          east: 135,
+          west: 123
         };
         /*var imageBounds = {
                 north: 45,
@@ -46,7 +46,7 @@
         };*/
         
         historicalOverlay = new google.maps.GroundOverlay(
-        'https://upload.wikimedia.org/wikipedia/commons/7/79/Korean_Peninsula_topographic_map.png',
+        'http://api.vworld.kr/req/wmts/1.0.0/980584DE-E32E-316C-A0F0-271B354FC1AE/Base/{z}/{y}/{x}.png',
         imageBounds);
      /*    historicalOverlay = new google.maps.GroundOverlay(
         './vworld.jsp',
