@@ -38,9 +38,9 @@
     _init: function(map, ec) {
       var self = this;
       self._map = map;
-      //初始化mapoverlay
+      //지도 오버레이 초기화
       /**
-       * 获取echarts容器
+       * echarts 컨테이너 받기
        *
        * @return {HTMLElement}
        * @public
@@ -50,7 +50,7 @@
       };
 
       /**
-       * 获取map实例
+       * 지도 인스턴스 가져 오기
        *
        * @return {map.Map}
        * @public
@@ -59,9 +59,9 @@
         return self._map;
       };
       /**
-       * 经纬度转换为屏幕像素
+       * 위도와 경도를 화면 픽셀로 변환
        *
-       * @param {Array.<number>} geoCoord  经纬度
+       * @param {Array.<number>} geoCoord  위도 및 경도
        * @return {Array.<number>}
        * @public
        */
@@ -72,9 +72,9 @@
       };
 
       /**
-       * 屏幕像素转换为经纬度
+       * 위도와 경도로 변환 된 화면 픽셀
        *
-       * @param {Array.<number>} pixel  像素坐标
+       * @param {Array.<number>} pixel  픽셀 좌표
        * @return {Array.<number>}
        * @public
        */
@@ -84,7 +84,7 @@
       };
 
       /**
-       * 初始化echarts实例
+       * 초기 echarts 인스턴스
        *
        * @return {ECharts}
        * @public
@@ -96,7 +96,7 @@
         return self._ec;
       };
 
-      // addMark wrap for get position from baidu map by geo location
+      // 지리적 위치에 따라 바이두 맵에서 위치를 얻기위한 addMark 랩
       // by kener at 2015.01.08
       self._addMarkWrap = function() {
         function _addMark(seriesIdx, markData, markType) {
@@ -137,7 +137,7 @@
       };
 
       /**
-       * 获取ECharts实例
+       * ECharts 인스턴스 가져 오기
        *
        * @return {ECharts}
        * @public
@@ -147,7 +147,7 @@
       };
 
       /**
-       * 获取地图的偏移量
+       * 지도의 오프셋을 가져옵니다
        *
        * @return {Array.<number>}
        * @public
@@ -157,8 +157,8 @@
       };
 
       /**
-       * 对echarts的setOption加一次处理
-       * 用来为markPoint、markLine中添加x、y坐标，需要name与geoCoord对应
+       * charts setOption에 하나의 치료 추가
+       * x 및 y 좌표를 markPoint 및 markLine에 추가하는 데 사용되며 이름은 geoCoord와 일치해야합니다
        *
        * @public
        * @param option
@@ -178,7 +178,7 @@
           }
         }
 
-        // 添加x、y
+        //  x, y 추가
         for (var i = 0, item; item = series[i++];) {
           var markPoint = item.markPoint || {};
           var markLine = item.markLine || {};
@@ -215,9 +215,9 @@
       };
 
       /**
-       * 增加x、y坐标
+       * x 및 y 좌표 증가
        *
-       * @param {Object} obj  markPoint、markLine data中的项，必须有name
+       * @param {Object} obj markPoint 및 markLine 데이터의 항목 이름이 있어야합니다
        * @param {Object} geoCoord
        */
       self._AddPos = function(obj) {
@@ -229,7 +229,7 @@
       };
 
       /**
-       * 绑定地图事件的处理方法
+       * 바인딩 맵 이벤트 처리 방법
        *
        * @private
        */
@@ -238,20 +238,20 @@
         self._map.on('moveend', _moveHandler('moveend'));
         self._map.on('zoomstart', function() {
           self._ec.clear();
-        }); //去掉zoomstart事件
+        }); //zoomstart 이벤트를 제거합니다
         self._map.on('zoomend', _zoomChangeHandler);
         self._ec.getZrender().on('dragstart', _dragZrenderHandler(true));
         self._ec.getZrender().on('dragend', _dragZrenderHandler(false));
         self._ec.getZrender().on('mouseup', function() {
           // self.setOption(self._option);
-          //修改了echarts源码解决了这个问题
+          //이 문제를 해결하기 위해 echarts 소스 코드를 수정했습니다.
         });
         self._ec.getZrender().on('mousedown', function() {
           // self._ec.clear();
-          //修改了echarts源码解决了这个问题
+          //이 문제를 해결하기 위해 echarts 소스 코드를 수정했습니다.
         });
         self._ec.getZrender().on('mousewheel', function(e) {
-          self._ec.clear(); //在mousewheel的时候清除echarts内容
+          self._ec.clear(); //지우기 echarts 내용 마우스 휠 시간
           self._lastMousePos = self._map.mouseEventToContainerPoint(e.event);
           var delta = L.DomEvent.getWheelDelta(e.event);
           var map = self._map,
@@ -276,7 +276,7 @@
       };
 
       /**
-       * 地图缩放触发事件
+       * 지도 확대 / 축소 트리거 이벤트
        *
        * @private
        */
@@ -289,16 +289,15 @@
       // }
 
       /**
-       * 地图移动、如拖拽触发事件
+       * 트리거 이벤트와 같은지도 이동
        *
-       * @param {string} type moving | moveend  移动中|移动结束
-       * @return {Function}
+       * @param {string} type moving | moveend 
        * @private
        */
       function _moveHandler(type) {
         return function() {
           var domPosition = self._map._getMapPanePos();
-          // 记录偏移量
+          //  레코드 오프셋
           self._mapOffset = [-parseInt(domPosition.x) || 0, -parseInt(domPosition.y) || 0];
           self._echartsContainer.style.left = self._mapOffset[0] + 'px';
           self._echartsContainer.style.top = self._mapOffset[1] + 'px';
@@ -313,7 +312,7 @@
       }
 
       /**
-       * Zrender拖拽触发事件
+       * Zrender트리거 이벤트
        *
        * @param {boolean} isStart
        * @return {Function}
