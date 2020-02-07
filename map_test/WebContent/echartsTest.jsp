@@ -25,16 +25,11 @@
 
 <script>
     var map = L.map('map');
-//     var baseLayers = {
-//         'GeoQ灰色底图': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
-//     };
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-//     var layerControl = L.control.layers(baseLayers, {
-    	
-//     });
-//     layerControl.addTo(map);
+
     map.setView(L.latLng(37.550339, 104.114129), 4);
 
     var overlay = new L.echartsLayer(map, echarts);

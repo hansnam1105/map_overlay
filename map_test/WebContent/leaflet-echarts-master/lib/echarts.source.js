@@ -23767,6 +23767,7 @@
                                 )
                             );
                             return;
+                            
                         } else if (this.component.yAxis.getAxis(yAxisIndex) && this.component.yAxis.getAxis(yAxisIndex).type === ecConfig.COMPONENT_TYPE_AXIS_CATEGORY) {
                             // 纵轴为类目轴
                             this._showAxisTrigger(xAxisIndex, yAxisIndex,
@@ -23786,7 +23787,7 @@
                     this._showAxisTrigger(-1, -1, -1);
                 }
             },
-
+            
             /**
              * 极坐标 
              */
@@ -26659,6 +26660,7 @@
                     // Normalize and filter data
                     var data = mlOption.data;
                     var edges = [];
+                    var test1 = 'test';
                     var zrWidth = this.zr.getWidth();
                     var zrHeight = this.zr.getHeight();
                     for (var i = 0; i < data.length; i++) {
@@ -26685,8 +26687,9 @@
                                 trigger: 'item'
                             }; // tooltip.trigger指定为item
                             mlData[0].name = mlData[0].name || '';
-                            mlData[1].name = mlData[1].name || '';
-                            mlData[0].value = value;
+                            mlData[1].name = mlData[1].name || '';   
+                            mlData[2] = value;
+                            mlData[0].value = value;                           
 
                             edges.push({
                                 points: [
@@ -26695,7 +26698,10 @@
                                     ],
                                     [this.parsePercent(mlData[1].x, zrWidth),
                                         this.parsePercent(mlData[1].y, zrHeight)
-                                    ]
+                                    ],
+                                    [this.parsePercent(mlData[2].x, zrWidth),
+                                    	this.parsePercent(mlData[2].y, zrHeight)
+                                    ],
                                 ],
                                 rawData: mlData,
                                 color: color
@@ -26734,7 +26740,7 @@
                         itemShape._mark = 'line';
 
                         var effect = this.deepMerge(
-                            [mlData[0], mlData[1], mlOption],
+                            [mlData[0], mlData[1], mlData[2], mlOption],
                             'effect'
                         );
                         if (effect.show) {
@@ -26745,7 +26751,8 @@
                         if (serie.type === ecConfig.CHART_TYPE_MAP) {
                             itemShape._geo = [
                                 this.getMarkGeo(mlData[0]),
-                                this.getMarkGeo(mlData[1])
+                                this.getMarkGeo(mlData[1]),
+                                this.getMarkGeo(mlData[2])
                             ];
                         }
 
@@ -26756,7 +26763,7 @@
                             mlData[0], i,
                             mlData[0].name
                             // 不要帮我代码规范
-                            + (mlData[1].name !== '' ? (' > ' + mlData[1].name) : ''),
+                            + (mlData[1].name !== '' ? (' > ' + mlData[1].name) : '')+(' '+ mlData[2]),
                             value
                         );
                         shapeList.push(itemShape);
