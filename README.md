@@ -13,7 +13,7 @@ Leaflet을 이용하여 구글 지도 위에 우리나라 영역만 VWORLD 지�
 [Leaflet DVF](https://github.com/humangeo/leaflet-dvf)를 이용하여 지도 내 대시보드 (선) 기능 추가
 
 
-## 2차 목적 (진행중)
+## 2차 목적 (완료)
 [Leaflet echarts](https://github.com/wandergis/leaflet-echarts) 을 사용하여 지도내 대시보드 수정
 
 ## 참고사이트
